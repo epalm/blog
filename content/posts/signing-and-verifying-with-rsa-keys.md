@@ -12,10 +12,10 @@ I recently needed to:
 1. Some time later, read the message on a Windows computer.
 1. Be pretty darn sure the message hadn't been tampered with.
 
-Public-key cryptography (aka [asymmetric cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)) to the rescue! Public-key cryptography has two main functions:
+Public-key cryptography (aka [asymmetric cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)) to the rescue! Paraphrasing Wikipedia's definition, public-key cryptography is a system that uses pairs of keys: *public keys* which may be shared widely, and *private keys* which are known only to the owner. After generating such a pair of keys, you can perform two main functions:
 
-1. Use a private key to **sign** a message that can be **verified** by the matching public key.
 1. Use a public key to **encrypt** a message which can only be **decrypted** by the matching private key.
+1. Use a private key to **sign** a message that can be **verified** by the matching public key.
 
 We're interested in function #1 above. This is a beginner tutorial on how to generate a pair of public/private RSA keys, use the private key to sign a message using **Python 2 on Ubuntu 14.04**, and then later use the public key to verify the message using **C# and .NET 4 on Windows 10**.
 
