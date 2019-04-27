@@ -1,4 +1,4 @@
-baseURL = "http://example.com/"
+baseURL = "https://epalm.github.io/"
 languageCode = "en-us"
 title = "Authoritative, Convincing Title"
 theme = "minimal"
