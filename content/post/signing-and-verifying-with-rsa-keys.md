@@ -12,7 +12,7 @@ I recently needed to:
 1. Some time later, read the message on a Windows computer.
 1. Be pretty darn sure the message hadn't been tampered with.
 
-Public-key cryptography (aka [asymmetric cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)) to the rescue! Paraphrasing Wikipedia's definition, public-key cryptography is a system that uses pairs of keys: *public keys* which may be shared widely, and *private keys* which are known only to the owner. After generating such a pair of keys, you can perform two main functions:
+Public-key cryptography (aka [asymmetric cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)) to the rescue! Paraphrasing Wikipedia's definition, public-key cryptography is a system that uses pairs of keys: **public keys** which may be shared widely, and **private keys** which are known only to the owner. After generating such a pair of keys, you can perform two main functions:
 
 1. Use a public key to **encrypt** a message which can only be **decrypted** by the matching private key.
 1. Use a private key to **sign** a message that can be **verified** by the matching public key.
