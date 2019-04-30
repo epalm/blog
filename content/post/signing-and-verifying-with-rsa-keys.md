@@ -302,3 +302,5 @@ If `rsa.VerifyHash` returns `true`, we're done! In other words, again, the messa
 At the time of writing (2018), RSA key signing and verifying with `.pem` files doesn't appear to be possible with stock Python or C#, and requires a couple of [free-as-in-freedom](https://en.wikipedia.org/wiki/Free_as_in_Freedom) 3rd party libraries. Thanks, Open Source Software! (The pycryptodome library is BSD licensed, and the BouncyCastle library is MIT licensed.)
 
 Hopefully this post lowers the barrier to entry and demystifies the topic a little bit. Now go sign some messages!
+
+<sub>PS: If you find any errors in my posts, or just want to talk about their contents, please [get in touch with me](/about).</sub>
