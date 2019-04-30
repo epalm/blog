@@ -17,7 +17,7 @@ Public-key cryptography (aka [asymmetric cryptography](https://en.wikipedia.org/
 1. Use a public key to **encrypt** a message which can only be **decrypted** by the matching private key.
 1. Use a private key to **sign** a message that can be **verified** by the matching public key.
 
-We're interested in function #1 above. This is a beginner tutorial on how to generate a pair of public/private RSA keys, use the private key to sign a message using **Python 2 on Ubuntu 14.04**, and then later use the public key to verify the message using **C# and .NET 4 on Windows 10**.
+We're interested in function #2 above. This is a beginner tutorial on how to generate a pair of public/private RSA keys, use the private key to sign a message using **Python 2 on Ubuntu 14.04**, and then later use the public key to verify the message using **C# and .NET 4 on Windows 10**.
 
 Disclaimer: I'm not a cryptography or security expert. That also means if I can understand this stuff, anyone can!
 
