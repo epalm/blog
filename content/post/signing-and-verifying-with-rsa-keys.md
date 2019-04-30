@@ -90,8 +90,6 @@ total 8
 -rw-r--r-- 1 epalm epalm  451 Oct  4 03:34 public.pem
 ```
 
-[Click here](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) if you want to know more about the `pem` file format. It was a filed attempt at securing email, but the container format has lived on.
-
 ## Sign the message with Python
 
 Unfortunately, I couldn't find a way to use stock Python to play with RSA key signing, and needed a 3rd party library called [pycryptodome](https://github.com/Legrandin/pycryptodome) (an active fork of, and drop-in replacement for, the idle-since-2014 [pycrypto](https://github.com/dlitz/pycrypto) library). To install pycryptodome you'll need to install a few dependencies first:
