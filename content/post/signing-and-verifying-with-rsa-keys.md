@@ -103,7 +103,7 @@ $ sudo pip install pycryptodome
 
 Now let's write some Python to sign a message with our private key. We'll also verify the message with our public key, which isn't strictly necessary at this point, but is a good sanity check. This code was written with help from the [pycryptodome documentation](https://www.pycryptodome.org/en/latest/).
 
-```
+```python
 from base64 import b64encode
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
@@ -137,7 +137,7 @@ Let's break down what's going on here.
 
 First, we read the private key from disk, and import it. This gives us an RSA key object to work with:
 
-```
+```python
 # load private key
 with open('private.pem', 'r') as f:
     private_key = RSA.import_key(f.read())
@@ -145,21 +145,21 @@ with open('private.pem', 'r') as f:
 
 Next, we hash the message, because, for technical reasons I'm not qualified to explain, the size of the message an RSA key can sign depends on the size of the RSA key itself. The 2048 bit key we generated above can handle RSA operations on messages up to 255 bytes. In our little example here, our message is simply `hello` (5 bytes, depending on string encoding), but consider that the message we want to sign could be anything, e.g. a large XML document, or a large binary file. Hashing the message, in this case with the [SHA256 hashing algorithm](https://en.wikipedia.org/wiki/SHA-2), generates a 32-byte representation of the message (no matter the original size of the message), and *that's* what we want to sign:
 
-```
+```python
 # hash the message
 digest = SHA256.new(message)
 ```
 
 Now we can sign the message hash (also called a "message digest", or just "digest"), using our private key:
 
-```
+```python
 # sign the digest
 signature = pkcs1_15.new(private_key).sign(digest)
 ```
 
 At this point we're done signing the message. However we can also use pycryptodome to verify that our private key, public key, message, and signature are all singing the same tune. To do this, we just load the public key from disk and import it:
 
-```
+```python
 # load public key
 with open('public.pem', 'r') as f:
     public_key = RSA.import_key(f.read())
@@ -167,7 +167,7 @@ with open('public.pem', 'r') as f:
 
 And then we verify with the public key, the message digest, and the signature:
 
-```
+```python
 # verify the digest and signature
 pkcs1_15.new(public_key).verify(digest, signature)
 ```
@@ -176,7 +176,7 @@ If the call to `verify` doesn't throw an error, we're good! We've got a public k
 
 Lastly, we base64-encode our signature. We do this because the signature at this point is just a collection of 256 bytes, and we're probably going to be sending it somewhere (along with the message), so base64 encoding turns it into a portable/printable string:
 
-```
+```python
 # base64 encode the signature
 signature_b64 = b64encode(signature)
 ```
@@ -197,7 +197,7 @@ Install-Package BouncyCastle
 
 Now let's write some C# to verify the message. This code was written with help from various StackOverflow questions and answers, because I couldn't find any BouncyCastle documentation relating to signing/verifying RSA keys.
 
-```
+```csharp
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.OpenSsl;
@@ -259,7 +259,7 @@ Again, let's break this down. Let's assume we've transferred the public key, the
 
 First, we load our public key, message, and base64-encoded signature from disk:
 
-```
+```csharp
 var publicKey = File.ReadAllText("public.pem");
 var message = File.ReadAllText("message.txt");
 var signatureB64 = File.ReadAllText("signature.txt");
@@ -267,7 +267,7 @@ var signatureB64 = File.ReadAllText("signature.txt");
 
 Next, we import the public key. Here's where we need BouncyCastle to convert a `.pem` file to `RSAParameters` using `PemReader` and `ToRSAParameters` along with some casting backflips (check out the `PublicKeyParams` method, and I've also included `PrivateKeyParams` for completeness). This gives us an RSA key object to work with:
 
-```
+```csharp
 // import public key
 var rsa = new RSACryptoServiceProvider();
 rsa.ImportParameters(PublicKeyParams(publicKey));
@@ -275,7 +275,7 @@ rsa.ImportParameters(PublicKeyParams(publicKey));
 
 Hash the message by sending the bytes of our message through our SHA256 hash function:
 
-```
+```csharp
 // hash the message
 byte[] buffer = Encoding.ASCII.GetBytes(message);
 byte[] digest = new SHA256Managed().ComputeHash(buffer);
@@ -283,14 +283,14 @@ byte[] digest = new SHA256Managed().ComputeHash(buffer);
 
 Remember we base64-encoded our signature, so we need to convert that back:
 
-```
+```csharp
 // base64 decode signature
 byte[] signature = Convert.FromBase64String(signatureB64);
 ```
 
 Lastly, we call `rsa.VerifyHash` with the message digest and signature. We also need to indicate which hash function was used on the message (in our case it was SHA256).
 
-```
+```csharp
 // verify the message digest and signature
 bool verified = rsa.VerifyHash(digest, CryptoConfig.MapNameToOID("SHA256"), signature);
 ```
